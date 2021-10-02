@@ -31,13 +31,10 @@ public class BudgetService {
                 long overlappingDays;
                 if (budgetYearMonth.equals(YearMonth.from(start))) {
                     overlappingDays = DAYS.between(start, budget.lastDay()) + 1;
-//                    result = result + budget.dailyAmount() * overlappingDays;
                 } else if (budgetYearMonth.equals(YearMonth.from(end))) {
                     overlappingDays = DAYS.between(budget.firstDay(), end) + 1;
-//                    result = result + budget.dailyAmount() * overlappingDays;
                 } else {
                     overlappingDays = DAYS.between(budget.firstDay(), budget.lastDay()) + 1;
-//                    result = result + budget.dailyAmount() * overlappingDays;
                 }
                 result = result + budget.dailyAmount() * overlappingDays;
             }
