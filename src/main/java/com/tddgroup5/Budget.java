@@ -28,4 +28,8 @@ public class Budget {
   LocalDate firstDay() {
       return getMonth().atDay(1);
   }
+
+  LocalDate lastDay() {
+      return getMonth().atEndOfMonth();
+  }
 }

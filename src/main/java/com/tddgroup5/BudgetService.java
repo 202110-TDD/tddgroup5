@@ -19,7 +19,7 @@ public class BudgetService {
         double result = 0;
         for (Budget budget : budgetRepo.getAll()) {
             YearMonth budgetYearMonth = budget.getMonth();
-            if (end.isBefore(budget.firstDay()) || start.isAfter(lastDay(budget))) {
+            if (end.isBefore(budget.firstDay()) || start.isAfter(budget.lastDay())) {
                 continue;
             }
             if (YearMonth.from(start).equals(YearMonth.from(end))) {
@@ -43,9 +43,5 @@ public class BudgetService {
             }
         }
         return result;
-    }
-
-    private LocalDate lastDay(Budget budget) {
-        return budget.getMonth().atEndOfMonth();
     }
 }
