@@ -18,13 +18,15 @@ public class Period {
         LocalDate overlappingStart = this.start.isAfter(budget.firstDay())
                 ? this.start
                 : budget.firstDay();
-        LocalDate overlappingEnd;
+        LocalDate overlappingEnd = this.end.isBefore(budget.lastDay())
+                ? this.end
+                : budget.lastDay();
         if (budget.getMonth().equals(YearMonth.from(start))) {
-            overlappingEnd = budget.lastDay();
+//            overlappingEnd = budget.lastDay();
         } else if (budget.getMonth().equals(YearMonth.from(end))) {
-            overlappingEnd = this.end;
+//            overlappingEnd = this.end;
         } else {
-            overlappingEnd = budget.lastDay();
+//            overlappingEnd = budget.lastDay();
         }
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
     }
