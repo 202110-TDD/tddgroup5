@@ -17,6 +17,7 @@ public class BudgetService {
             return 0;
         }
         double result = 0;
+        Period period = new Period(start, end);
         for (Budget budget : budgetRepo.getAll()) {
             if (end.isBefore(budget.firstDay()) || start.isAfter(budget.lastDay())) {
                 continue;
@@ -27,7 +28,7 @@ public class BudgetService {
                     return budget.dailyAmount() * overlappingDays;
                 }
             } else {
-                long overlappingDays = new Period(start, end).getOverlappingDays(budget);
+                long overlappingDays = period.getOverlappingDays(budget);
                 result += budget.dailyAmount() * overlappingDays;
             }
         }
