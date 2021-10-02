@@ -36,4 +36,8 @@ public class Budget {
   double dailyAmount() {
       return getAmount() / (double) getMonth().lengthOfMonth();
   }
+
+  Period createPeriod() {
+      return new Period(firstDay(), lastDay());
+  }
 }

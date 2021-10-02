@@ -19,23 +19,16 @@ public class BudgetService {
         double result = 0;
         Period period = new Period(start, end);
         for (Budget budget : budgetRepo.getAll()) {
-//            if (end.isBefore(budget.firstDay()) || start.isAfter(budget.lastDay())) {
-//                continue;
-//            }
             if (YearMonth.from(start).equals(YearMonth.from(end))) {
                 if (YearMonth.from(start).equals(budget.getMonth())) {
                     long overlappingDays = DAYS.between(start, end) + 1;
                     return budget.dailyAmount() * overlappingDays;
                 }
             } else {
-                long overlappingDays = period.getOverlappingDays(createPeriod(budget));
+                long overlappingDays = period.getOverlappingDays(budget.createPeriod());
                 result += budget.dailyAmount() * overlappingDays;
             }
         }
         return result;
-    }
-
-    private Period createPeriod(Budget budget) {
-        return new Period(budget.firstDay(), budget.lastDay());
     }
 }
