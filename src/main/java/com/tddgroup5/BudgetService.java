@@ -14,10 +14,10 @@ public class BudgetService {
     }
 
     public double query(LocalDate start, LocalDate end) {
-        double result = 0;
         if (start.isAfter(end)) {
             return 0;
         }
+        double result = 0;
         for (Budget budget : budgetRepo.getAll()) {
             YearMonth budgetYearMonth = YearMonth.parse(budget.getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
             if (end.isBefore(budgetYearMonth.atDay(1)) || start.isAfter(budgetYearMonth.atEndOfMonth())) {
