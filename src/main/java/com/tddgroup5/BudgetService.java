@@ -19,9 +19,9 @@ public class BudgetService {
         double result = 0;
         Period period = new Period(start, end);
         for (Budget budget : budgetRepo.getAll()) {
-            if (end.isBefore(budget.firstDay()) || start.isAfter(budget.lastDay())) {
-                continue;
-            }
+//            if (end.isBefore(budget.firstDay()) || start.isAfter(budget.lastDay())) {
+//                continue;
+//            }
             if (YearMonth.from(start).equals(YearMonth.from(end))) {
                 if (YearMonth.from(start).equals(budget.getMonth())) {
                     long overlappingDays = DAYS.between(start, end) + 1;

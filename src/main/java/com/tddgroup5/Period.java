@@ -15,6 +15,9 @@ public class Period {
     }
 
     long getOverlappingDays(Budget budget) {
+        if (end.isBefore(budget.firstDay()) || start.isAfter(budget.lastDay())) {
+            return 0;
+        }
         LocalDate overlappingStart = this.start.isAfter(budget.firstDay())
                 ? this.start
                 : budget.firstDay();
