@@ -1,5 +1,8 @@
 package com.tddgroup5;
 
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+
 public class Budget {
   private String yearMonth;
   private int amount;
@@ -15,5 +18,9 @@ public class Budget {
 
   public int getAmount() {
     return amount;
+  }
+
+  YearMonth getMonth() {
+      return YearMonth.parse(getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
   }
 }

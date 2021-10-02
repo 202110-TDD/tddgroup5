@@ -2,7 +2,6 @@ package com.tddgroup5;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -19,7 +18,7 @@ public class BudgetService {
         }
         double result = 0;
         for (Budget budget : budgetRepo.getAll()) {
-            YearMonth budgetYearMonth = getMonth(budget);
+            YearMonth budgetYearMonth = budget.getMonth();
             if (end.isBefore(budgetYearMonth.atDay(1)) || start.isAfter(budgetYearMonth.atEndOfMonth())) {
                 continue;
             }
@@ -44,9 +43,5 @@ public class BudgetService {
             }
         }
         return result;
-    }
-
-    private YearMonth getMonth(Budget budget) {
-        return YearMonth.parse(budget.getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
     }
 }
