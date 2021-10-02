@@ -28,7 +28,7 @@ public class BudgetService {
                     return budget.dailyAmount() * overlappingDays;
                 }
             } else {
-                long overlappingDays = period.getOverlappingDays(budget);
+                long overlappingDays = period.getOverlappingDays(new Period(budget.firstDay(), budget.lastDay()));
                 result += budget.dailyAmount() * overlappingDays;
             }
         }
