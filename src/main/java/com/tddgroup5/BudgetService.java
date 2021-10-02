@@ -25,7 +25,7 @@ public class BudgetService {
             if (YearMonth.from(start).equals(YearMonth.from(end))) {
                 if (YearMonth.from(start).equals(budgetYearMonth)) {
                     long days = DAYS.between(start, end) + 1;
-                    return dailyAmount(budget) * days;
+                    return budget.dailyAmount() * days;
                 }
             } else {
                 if (budgetYearMonth.equals(YearMonth.from(start))) {
@@ -43,9 +43,5 @@ public class BudgetService {
             }
         }
         return result;
-    }
-
-    private double dailyAmount(Budget budget) {
-        return budget.getAmount() / (double) budget.getMonth().lengthOfMonth();
     }
 }
