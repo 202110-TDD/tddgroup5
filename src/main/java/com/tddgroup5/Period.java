@@ -14,7 +14,7 @@ public class Period {
     }
 
     long getOverlappingDays(Period another) {
-        if (start.isAfter(end)) {
+        if (isInvalid()) {
             return 0;
         }
         if (withoutOverlapping(another)) {
@@ -27,6 +27,10 @@ public class Period {
                 ? this.end
                 : another.end;
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
+    }
+
+    private boolean isInvalid() {
+        return start.isAfter(end);
     }
 
     private boolean withoutOverlapping(Period another) {
