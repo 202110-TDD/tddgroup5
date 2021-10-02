@@ -17,7 +17,7 @@ public class Period {
         if (start.isAfter(end)) {
             return 0;
         }
-        if (end.isBefore(another.start) || start.isAfter(another.end)) {
+        if (withoutOverlapping(another)) {
             return 0;
         }
         LocalDate overlappingStart = this.start.isAfter(another.start)
@@ -27,5 +27,9 @@ public class Period {
                 ? this.end
                 : another.end;
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
+    }
+
+    private boolean withoutOverlapping(Period another) {
+        return end.isBefore(another.start) || start.isAfter(another.end);
     }
 }
