@@ -27,19 +27,19 @@ public class BudgetService {
                     return budget.dailyAmount() * overlappingDays;
                 }
             } else {
-                long overlappingDays = getOverlappingDays(start, end, budget);
+                long overlappingDays = getOverlappingDays(new Period(start, end), budget);
                 result = result + budget.dailyAmount() * overlappingDays;
             }
         }
         return result;
     }
 
-    private long getOverlappingDays(LocalDate start, LocalDate end, Budget budget) {
+    private long getOverlappingDays(Period period, Budget budget) {
         long overlappingDays;
-        if (budget.getMonth().equals(YearMonth.from(start))) {
-            overlappingDays = DAYS.between(start, budget.lastDay()) + 1;
-        } else if (budget.getMonth().equals(YearMonth.from(end))) {
-            overlappingDays = DAYS.between(budget.firstDay(), end) + 1;
+        if (budget.getMonth().equals(YearMonth.from(period.getStart()))) {
+            overlappingDays = DAYS.between(period.getStart(), budget.lastDay()) + 1;
+        } else if (budget.getMonth().equals(YearMonth.from(period.getEnd()))) {
+            overlappingDays = DAYS.between(budget.firstDay(), period.getEnd()) + 1;
         } else {
             overlappingDays = DAYS.between(budget.firstDay(), budget.lastDay()) + 1;
         }
