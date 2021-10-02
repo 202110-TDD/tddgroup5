@@ -26,18 +26,18 @@ public class BudgetService {
             if (YearMonth.from(start).equals(YearMonth.from(end))) {
                 if (YearMonth.from(start).equals(budgetYearMonth)) {
                     long days = DAYS.between(start, end) + 1;
-                    return budget.getAmount() / budgetYearMonth.lengthOfMonth() * days;
+                    return budget.getAmount() / (double) budgetYearMonth.lengthOfMonth() * days;
                 }
             } else {
                 if (budgetYearMonth.equals(YearMonth.from(start))) {
                     int startDay = start.getDayOfMonth();
                     int lengthOfMonth = budgetYearMonth.lengthOfMonth();
                     int period = lengthOfMonth - startDay + 1;
-                    result = result + budget.getAmount() / lengthOfMonth * period;
+                    result = result + budget.getAmount() / (double) lengthOfMonth * period;
                 } else if (budgetYearMonth.equals(YearMonth.from(end))) {
                     int endDay = end.getDayOfMonth();
                     int lengthOfMonth = budgetYearMonth.lengthOfMonth();
-                    result = result + budget.getAmount() / lengthOfMonth * endDay;
+                    result = result + budget.getAmount() / (double) lengthOfMonth * endDay;
                 } else {
                     result = result + budget.getAmount();
                 }
