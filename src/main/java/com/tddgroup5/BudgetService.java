@@ -19,7 +19,7 @@ public class BudgetService {
         }
         double result = 0;
         for (Budget budget : budgetRepo.getAll()) {
-            YearMonth budgetYearMonth = YearMonth.parse(budget.getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
+            YearMonth budgetYearMonth = getMonth(budget);
             if (end.isBefore(budgetYearMonth.atDay(1)) || start.isAfter(budgetYearMonth.atEndOfMonth())) {
                 continue;
             }
@@ -44,5 +44,9 @@ public class BudgetService {
             }
         }
         return result;
+    }
+
+    private YearMonth getMonth(Budget budget) {
+        return YearMonth.parse(budget.getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
     }
 }
