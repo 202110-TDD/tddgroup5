@@ -13,7 +13,7 @@ public class Period {
         this.end = end;
     }
 
-    long getOverlappingDays(Period another) {
+     public long getOverlappingDays(Period another) {
         if (isInvalid() || withoutOverlapping(another)) {
             return 0;
         }

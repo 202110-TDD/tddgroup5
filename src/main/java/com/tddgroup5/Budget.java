@@ -5,43 +5,43 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
 public class Budget {
-  private String yearMonth;
-  private int amount;
+    private String yearMonth;
+    private int amount;
 
-  public Budget(String yearMonth, int amount) {
-    this.yearMonth = yearMonth;
-    this.amount = amount;
-  }
+    public Budget(String yearMonth, int amount) {
+        this.yearMonth = yearMonth;
+        this.amount = amount;
+    }
 
-  public String getYearMonth() {
-    return yearMonth;
-  }
+    public double overlappingAmount(Period period) {
+        return dailyAmount() * period.getOverlappingDays(createPeriod());
+    }
 
-  public int getAmount() {
-    return amount;
-  }
+    private Period createPeriod() {
+        return new Period(firstDay(), lastDay());
+    }
 
-  YearMonth getMonth() {
-      return YearMonth.parse(getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
-  }
+    private double dailyAmount() {
+        return getAmount() / (double) getMonth().lengthOfMonth();
+    }
 
-  LocalDate firstDay() {
-      return getMonth().atDay(1);
-  }
+    private LocalDate firstDay() {
+        return getMonth().atDay(1);
+    }
 
-  LocalDate lastDay() {
-      return getMonth().atEndOfMonth();
-  }
+    private int getAmount() {
+        return amount;
+    }
 
-  double dailyAmount() {
-      return getAmount() / (double) getMonth().lengthOfMonth();
-  }
+    private YearMonth getMonth() {
+        return YearMonth.parse(getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
+    }
 
-  Period createPeriod() {
-      return new Period(firstDay(), lastDay());
-  }
+    private String getYearMonth() {
+        return yearMonth;
+    }
 
-  double overlappingAmount(Period period) {
-      return dailyAmount() * period.getOverlappingDays(createPeriod());
-  }
+    private LocalDate lastDay() {
+        return getMonth().atEndOfMonth();
+    }
 }
