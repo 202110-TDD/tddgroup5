@@ -21,13 +21,6 @@ public class Period {
         LocalDate overlappingEnd = this.end.isBefore(budget.lastDay())
                 ? this.end
                 : budget.lastDay();
-        if (budget.getMonth().equals(YearMonth.from(start))) {
-//            overlappingEnd = budget.lastDay();
-        } else if (budget.getMonth().equals(YearMonth.from(end))) {
-//            overlappingEnd = this.end;
-        } else {
-//            overlappingEnd = budget.lastDay();
-        }
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
     }
 }
