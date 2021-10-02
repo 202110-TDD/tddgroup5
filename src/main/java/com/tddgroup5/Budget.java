@@ -1,5 +1,6 @@
 package com.tddgroup5;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
@@ -22,5 +23,9 @@ public class Budget {
 
   YearMonth getMonth() {
       return YearMonth.parse(getYearMonth(), DateTimeFormatter.ofPattern("yyyyMM"));
+  }
+
+  LocalDate firstDay() {
+      return getMonth().atDay(1);
   }
 }
