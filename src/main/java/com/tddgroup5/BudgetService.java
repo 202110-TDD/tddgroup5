@@ -28,17 +28,18 @@ public class BudgetService {
                     return budget.dailyAmount() * overlappingDays;
                 }
             } else {
+                long overlappingDays;
                 if (budgetYearMonth.equals(YearMonth.from(start))) {
-                    long overlappingDays = DAYS.between(start, budget.lastDay()) + 1;
-                    result = result + budget.dailyAmount() * overlappingDays;
+                    overlappingDays = DAYS.between(start, budget.lastDay()) + 1;
+//                    result = result + budget.dailyAmount() * overlappingDays;
                 } else if (budgetYearMonth.equals(YearMonth.from(end))) {
-                    long overlappingDays = DAYS.between(budget.firstDay(), end) + 1;
-                    result = result + budget.dailyAmount() * overlappingDays;
+                    overlappingDays = DAYS.between(budget.firstDay(), end) + 1;
+//                    result = result + budget.dailyAmount() * overlappingDays;
                 } else {
-                    long overlappingDays = DAYS.between(budget.firstDay(), budget.lastDay()) + 1;
-                    result = result + budget.dailyAmount() * overlappingDays;
-//                    result = result + budget.getAmount();
+                    overlappingDays = DAYS.between(budget.firstDay(), budget.lastDay()) + 1;
+//                    result = result + budget.dailyAmount() * overlappingDays;
                 }
+                result = result + budget.dailyAmount() * overlappingDays;
             }
         }
         return result;
