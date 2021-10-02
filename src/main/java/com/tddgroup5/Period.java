@@ -23,10 +23,14 @@ public class Period {
                     : budget.firstDay();
             overlappingEnd = budget.lastDay();
         } else if (budget.getMonth().equals(YearMonth.from(end))) {
-            overlappingStart = budget.firstDay();
+            overlappingStart = this.start.isAfter(budget.firstDay())
+                    ? this.start
+                    : budget.firstDay();
             overlappingEnd = this.end;
         } else {
-            overlappingStart = budget.firstDay();
+            overlappingStart = this.start.isAfter(budget.firstDay())
+                    ? this.start
+                    : budget.firstDay();
             overlappingEnd = budget.lastDay();
         }
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
